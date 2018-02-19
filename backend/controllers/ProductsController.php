@@ -3,16 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Categories;
-use backend\models\CategoriesSearch;
+use backend\models\Products;
+use backend\models\ProductsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CategoriesController implements the CRUD actions for Categories model.
+ * ProductsController implements the CRUD actions for Products model.
  */
-class CategoriesController extends Controller
+class ProductsController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,12 +30,12 @@ class CategoriesController extends Controller
     }
 
     /**
-     * Lists all Categories models.
+     * Lists all Products models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new CategoriesSearch();
+        $searchModel = new ProductsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class CategoriesController extends Controller
     }
 
     /**
-     * Displays a single Categories model.
+     * Displays a single Products model.
      * @param string $id
      * @return mixed
      */
@@ -57,18 +57,18 @@ class CategoriesController extends Controller
     }
 
     /**
-     * Creates a new Categories model.
+     * Creates a new Products model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Categories();
+        $model = new Products();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->category_entered_data = date('Y-m-d h:m:s');
+            $model->product_entered_data = date('Y-m-d h:m:s');
             $model->save();
-            return $this->redirect(['view', 'id' => $model->category_id]);
+            return $this->redirect(['view', 'id' => $model->product_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -77,7 +77,7 @@ class CategoriesController extends Controller
     }
 
     /**
-     * Updates an existing Categories model.
+     * Updates an existing Products model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id
      * @return mixed
@@ -87,7 +87,7 @@ class CategoriesController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->category_id]);
+            return $this->redirect(['view', 'id' => $model->product_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -96,7 +96,7 @@ class CategoriesController extends Controller
     }
 
     /**
-     * Deletes an existing Categories model.
+     * Deletes an existing Products model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $id
      * @return mixed
@@ -109,15 +109,15 @@ class CategoriesController extends Controller
     }
 
     /**
-     * Finds the Categories model based on its primary key value.
+     * Finds the Products model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id
-     * @return Categories the loaded model
+     * @return Products the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Categories::findOne($id)) !== null) {
+        if (($model = Products::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
