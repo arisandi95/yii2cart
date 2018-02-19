@@ -28,7 +28,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'product_title',
             'product_description:ntext',
             'product_price',
-            'product_image',
+            // 'product_image:image',
+            [
+                'label' => 'Product Image',
+                'attribute' => 'product_image',
+                'format' => 'html',
+                'value' => function($model){
+                    return yii\bootstrap\Html::img($model->product_image, ['width' => '150']);
+                }
+            ],
             // 'product_status',
             // 'product_entered_data',
             // 'category_id',

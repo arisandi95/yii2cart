@@ -34,12 +34,13 @@ class Products extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['product_title', 'product_price', 'product_image', 'category_id'], 'required'],
+            [['product_title', 'product_price', 'category_id'], 'required'],
             [['product_description', 'product_status'], 'string'],
             [['product_price'], 'number'],
             [['product_entered_data'], 'safe'],
             [['category_id'], 'integer'],
-            [['product_title', 'product_image'], 'string', 'max' => 256],
+            [['product_title'], 'string', 'max' => 256],
+            [['product_image'], 'file', 'extensions' => 'jpg,png,gif,jpeg'],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'category_id']],
         ];
     }
@@ -54,7 +55,7 @@ class Products extends \yii\db\ActiveRecord
             'product_title' => 'Product Title',
             'product_description' => 'Product Description',
             'product_price' => 'Product Price',
-            'product_image' => 'Product Image',
+            'product_image' => 'Upload Product Image',
             'product_status' => 'Product Status',
             'product_entered_data' => 'Product Entered Data',
             'category_id' => 'Category ID',
