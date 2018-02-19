@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\StringHelper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\CategoriesSearch */
@@ -26,7 +27,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'category_id',
             'category_title',
-            'category_description:ntext',
+            // 'category_description:ntext',
+            [
+                'label' => 'Category Description',
+                'attribute' => 'category_description',
+                'value' => function($model){
+                    return StringHelper::truncate($model->category_description, 15, "...", false, true);
+                }
+            ],
             'category_status',
             'category_entered_data',
 
