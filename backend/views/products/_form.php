@@ -12,7 +12,9 @@ use yii\helpers\ArrayHelper;
 
 <div class="products-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'options' => ['enctype' => 'multipart/form-data']
+    ]); ?>
 
     <?= $form->field($model, 'product_title')->textInput(['maxlength' => true]) ?>
 
@@ -20,11 +22,9 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'product_price')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'product_image')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'product_image')->fileInput() ?>
 
-    <?= $form->field($model, 'product_status')->dropDownList([ 'in stock' => 'In stock', 'out of stock' => 'Out of stock', ], ['prompt' => '']) ?>
-
-    <?= $form->field($model, 'product_entered_data')->textInput() ?>
+    <?= $form->field($model, 'product_status')->dropDownList([ 'in stock' => 'In stock', 'out of stock' => 'Out of stock', ], ['prompt' => 'Select a Status']) ?>
 
     <?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::
             map(Categories::
