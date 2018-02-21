@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\StringHelper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ProductsSearch */
@@ -26,7 +27,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'product_id',
             'product_title',
-            'product_description:ntext',
+            // 'product_description:ntext',
+            [
+                'label' => 'Product Description',
+                'headerOptions' => array('style' => 'width : 30px'),
+                'filterHtmlOptions' => array('style' => 'width : 30px'),
+                'attribute' => 'product_description',
+                'value' => function ($model) {
+                    return StringHelper::truncate($model->product_description, 100, '...');
+                },
+            ],
             'product_price',
             // 'product_image:image',
             [
