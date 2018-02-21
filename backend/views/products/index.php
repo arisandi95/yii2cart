@@ -30,11 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'product_description:ntext',
             [
                 'label' => 'Product Description',
-                'headerOptions' => array('style' => 'width : 30px'),
-                'filterHtmlOptions' => array('style' => 'width : 30px'),
+                'contentOptions' => ['style' => 'width:200px; white-space : normal;'],
                 'attribute' => 'product_description',
                 'value' => function ($model) {
-                    return StringHelper::truncate($model->product_description, 100, '...');
+                    return StringHelper::truncate($model->product_description, 200, '...');
                 },
             ],
             'product_price',
