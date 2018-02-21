@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use yii\widgets\ActiveForm;
 
 /**
  * ProductsController implements the CRUD actions for Products model.
@@ -65,6 +66,14 @@ class ProductsController extends Controller
     public function actionCreate()
     {
         $model = new Products();
+        
+        if(
+            Yii::$app->request->isAjax && 
+            $model->load(Yii::$app->request->post()) 
+        ) {
+            Yii::$app->response->format = 'json';
+            return ActiveForm::validate($model);
+        }
 
         if ($model->load(Yii::$app->request->post())) {
             $model->product_image = UploadedFile::getInstance($model, 'product_image');

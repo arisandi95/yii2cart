@@ -38,6 +38,7 @@ class Products extends \yii\db\ActiveRecord
             [['product_description', 'product_status'], 'string'],
             [['product_price'], 'number'],
             [['product_entered_data', 'sale_start_date', 'sale_end_date'], 'safe'],
+            [['sale_end_date'], 'compareDate'],
             [['category_id'], 'integer'],
             [['product_title'], 'string', 'max' => 256],
             [['product_image'], 'file', 'extensions' => 'jpg,png,gif,jpeg'],
@@ -68,5 +69,14 @@ class Products extends \yii\db\ActiveRecord
     public function getCategory()
     {
         return $this->hasOne(Categories::className(), ['category_id' => 'category_id']);
+    }
+
+    public function compareDate($attribute, $params) {
+        $sale_start_date = date($this->sale_start_date);
+        $sale_end_date = date($this->sale_end_date);
+
+        if ($sale_start_date > $sale_end_date) {
+            $this->addError($attribute, 'sale end date must be greate than sale start date');
+        }
     }
 }

@@ -14,7 +14,8 @@ use yii\jui\DatePicker;
 <div class="products-form">
 
     <?php $form = ActiveForm::begin([
-        'options' => ['enctype' => 'multipart/form-data']
+        'options' => ['enctype' => 'multipart/form-data'],
+        'enableAjaxValidation' => true,
     ]); ?>
 
     <?= $form->field($model, 'product_title')->textInput(['maxlength' => true]) ?>
